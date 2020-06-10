@@ -1,0 +1,17 @@
+{
+  "name": "libp2p-dht-scrape-client",
+  "version": "0.0.0",
+  "description": "A Node.js CLI client for dht.scrape.stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alan Shaw",
+  "license": "MIT",
+  "dependencies": {
+    "iterable-ndjson": "^1.1.0",
+    "log-update": "^4.0.0",
+    "node-fetch": "^2.6.0",
+    "stream-to-it": "^0.2.0"
+  }
+}
