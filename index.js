@@ -26,8 +26,7 @@ async function main () {
       }
     }
 
-    // TODO: merge fields?
-    peers.set(peerID, { peerID, addresses, agentVersion, protocols })
+    peers.set(peerID, mergePeerData(peerData, { peerID, addresses, agentVersion, protocols }))
 
     const stortedVersions = Array.from(versions).sort((a, b) => b[1] - a[1])
 
@@ -38,6 +37,19 @@ ${stortedVersions.slice(0, 10).map(([k, v]) => `  ${v}x ${k}`).join('\n')}
   ...and ${stortedVersions.slice(10).length} more
 `)
   }
+}
+
+function mergePeerData (p0 = {}, p1 = {}) {
+  return {
+    peerID: p0.peerID || p1.peerID,
+    addresses: mergeStringArrays(p0.addresses, p1.addresses),
+    agentVersion: p0.agentVersion || p1.agentVersion,
+    protocols: mergeStringArrays(p0.protocols, p1.protocols)
+  }
+}
+
+function mergeStringArrays (a0 = [], a1 = []) {
+  return a0.concat(a1.filter(s => a0.includes(s)))
 }
 
 main().catch(console.error)
